@@ -2,45 +2,29 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 import "milligram";
+import LoginForm from "./LoginForm";
+import UserPanel from "./UserPanel";
+
 
 function App() {
-    const [email, setEmail] = useState('');
-    const [logIn, setLogIn] = useState(false)
+    const [logIn, setLogIn] = useState(null)
 
-    function handleChange(event) {
-        setEmail(event.target.value)
-    }
 
-    function changeStatus(){
+    function changeStatus(email){
         if (logIn){
-            setLogIn(false)
-            setEmail('')
+            setLogIn(null)
         }else {
-            setLogIn(true)
+            setLogIn(email)
         }
-
     }
 
-    if (!logIn) {
-        return  (
-            <div>
-                <h1>Witaj w systemie do zapisow na zajecia </h1>
-                <div>
-                    <h2>Zaloguj sie e-mailem </h2>
-                    <input type="text"  value={email} onChange={handleChange}/>
-                    <button type="button"  onClick={changeStatus}>Wchodze</button>
-                </div>
-            </div>
-        )
-    } else {
-      return (
-          <div>
-              <h2> Witaj  {email} !</h2>
-              <button type="button" onClick={changeStatus}>Wyloguj</button>
+    return (
+        <div>
+            <h1>Witaj w systemie do zapisow na zajecia </h1>
+            {logIn ?  <UserPanel username={logIn} onLogout={changeStatus} /> : <LoginForm onLogin={changeStatus}/> }
+        </div>
 
-          </div>
-      )
-    }
+    )
 
 
 }
