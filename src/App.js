@@ -5,6 +5,8 @@ import "milligram";
 import LoginForm from "./LoginForm";
 import UserPanel from "./UserPanel";
 
+import MeetingsPage from "./meetings/MeetingPage";
+
 
 function App() {
     const [logIn, setLogIn] = useState(null)
@@ -21,8 +23,10 @@ function App() {
     return (
         <div>
             <h1>Witaj w systemie do zapisow na zajecia </h1>
-            {logIn ?  <UserPanel username={logIn} onLogout={changeStatus} /> : <LoginForm onLogin={changeStatus}/> }
+            {logIn ?  <UserPanel username={logIn} onLogout={changeStatus} />
+                : <LoginForm onLogin={changeStatus}/> }
         </div>
+
 
     )
 
